@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JED-CARS</title>
+    <!-- Font En lace para los iconos -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=stat_minus_1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="icon" type="image/png" href="Imagenes/Logo/Logo2.0.png">
+    <style>
+        /* Estilos CSS básicos para visualizar la estructura */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0px;
+            box-sizing: border-box;
+            color: #545454;
+            background-image: url('Imagenes/Fondo/Body.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Cabecera */
+        header {
+            background-color: rgba(0, 0, 0, 0.45);
+            /* Fondo semitransparente con color #222831 */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+            /* Sombra para destacar */
+            position: relative;
+            z-index: 1;
+            /* Asegura que esté por encima del banner */
+            position: sticky;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 100px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            margin-left: 0;
+            /* Elimina separación excesiva del nav respecto al logo */
+        }
+
+        nav {
+            margin-left: 300px;
+            /* Empuja el nav hacia la derecha */
+            margin-right: 120px;
+            /* Aumenta el margen derecho para correrlo más a la derecha */
+        }
+
+        nav li {
+            position: relative;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            font-weight: 500;
+            font-size: 1.08rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            transition: background 0.22s cubic-bezier(.4, 0, .2, 1), color 0.22s cubic-bezier(.4, 0, .2, 1), box-shadow 0.22s cubic-bezier(.4, 0, .2, 1), letter-spacing 0.18s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+        }
+
+        nav a::after {
+            display: block;
+            height: 2.5px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #ef233c 0%, #fff 100%);
+            width: 0;
+            transition: width 0.22s cubic-bezier(.4, 0, .2, 1);
+            position: absolute;
+            left: 22px;
+            bottom: 6px;
+        }
+
+        nav a:hover,
+        nav li:hover>a {
+            background: rgba(239, 35, 60, 0.10);
+            color: #ef233c;
+            box-shadow: 0 4px 18px rgba(26, 38, 57, 0.13);
+            letter-spacing: 1.2px;
+        }
+
+        nav a:hover::after,
+        nav li:hover>a::after {
+            width: 60%;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(34, 40, 49, 0.98);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(34, 40, 49, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
+            min-width: 200px;
+            padding: 10px 0;
+            z-index: 20;
+            animation: submenuFadeIn 0.22s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        @keyframes submenuFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .submenu li {
+            margin: 0;
+        }
+
+        .submenu a {
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.18s cubic-bezier(.4, 0, .2, 1), color 0.18s cubic-bezier(.4, 0, .2, 1);
+            width: 100%;
+            display: block;
+        }
+
+        .submenu a:hover {
+            background: linear-gradient(90deg, #ef233c 0%, #222831 100%);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav li:hover>.submenu {
+            display: block;
+        }
+
+        /* Responsive nav */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 12px;
+            }
+
+            nav a {
+                padding: 8px 12px;
+                font-size: 0.98rem;
+            }
+
+            .submenu {
+                min-width: 140px;
+            }
+
+            .submenu a {
+                padding: 10px 16px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Banner Principal */
+        .banner-principal {
+            background-color: #f0f0f0;
+            color: #545454;
+            text-align: center;
+            padding: 100px 20px;
+            background-image: url('https://crediautos.cl/wp-content/uploads/2021/02/cuando-llegan-los-autos-nuevos-a-chile.jpg');
+            background-size: cover;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            position: relative;
+            z-index: -1;
+            top: -100px;
+            background-attachment: fixed;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 10);
+            /* Sombra para destacar */
+        }
+
+        .hero-text {
+            font-size: 61px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            display: inline;
+            /* Para que los spans estén en la misma línea */
+            position: relative;
+            top: 100px;
+            /* Ajusta este valor para bajar el eslogan */
+        }
+
+        .hero-text .part1,
+        .hero-text .part2 {
+            color: #dddddd;
+            /* Gris claro */
+        }
+
+        .hero-text .part3 {
+            color: #ef233c;
+            /* Rojo */
+        }
+
+
+        /* Galeria de Imágenes */
+        .container {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 20vh;
+            transform-style: preserve-3d;
+            background-color: transparent;
+            /* Cambia el color de fondo a transparente */
+        }
+
+        .box {
+            position: relative;
+            width: 300px;
+            /* Increased width for larger images */
+            height: 300px;
+            /* Increased height for larger images */
+            transform-style: preserve-3d;
+            animation: animate 40s linear infinite;
+            /* Added animation from the second code */
+        }
+
+        @keyframes animate {
+            0% {
+                transform: perspective(1500px) rotateY(0deg);
+                /* Increased perspective */
+            }
+
+            100% {
+                transform: perspective(1500px) rotateY(360deg);
+                /* Increased perspective */
+            }
+        }
+
+        .box span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            transform-style: preserve-3d;
+            /* Increased translateZ to push images further out */
+            transform: rotateY(calc(var(--i) * 45deg)) translateZ(500px);
+            /* Reduced or removed reflection for better separation */
+            /* -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0005); */
+        }
+
+        .box span img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            /* Reduced image size to create space */
+            height: 80%;
+            /* Reduced image size to create space */
+            object-fit: contain;
+            /* Use contain to fit the image within the reduced size */
+            user-select: none;
+        }
+
+        .box span a {
+            display: block;
+            /* Make the link fill the span */
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Banner con Imagen y Texto */
+        .banner-info {
+            display: flex;
+            align-items: center;
+            padding: 40px 20px;
+            background-color: #fff;
+            background-image: url('Imagenes/Fondo/Parallaxfondo3.png');
+            /* Imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Hace que la imagen de fondo quede fija */
+            position: relative;
+            /*Sombra oscura sobre la imagen de fondo*/
+            overflow: hidden;
+            /*Sombra oscura sobre la imagen de fondo*/
+        }
+
+        .banner-info .image-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .banner-info img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .banner-info .text-container {
+            flex: 1;
+            padding-left: 20px;
+            color: #dddddd;
+            font-size: 30px;
+            /* Mantiene el tamaño de la fuente */
+            font-weight: bold;
+            /* Mantiene el texto en negrita */
+            margin: 0;
+            /* Elimina márgenes predeterminados del h1 si es necesario */
+            padding: 0;
+            /* Elimina rellenos predeterminados del h1 si es necesario */
+            display: inline;
+            /* Para que los spans estén en la misma línea */
+        }
+
+        .banner-info h2 {
+            margin-top: 0;
+        }
+
+        .floating-image {
+            border-radius: 18px;
+            animation: floatYProfessional 3.2s cubic-bezier(.45, .05, .55, .95) infinite;
+            transition: box-shadow 0.3s;
+        }
+
+        @keyframes floatYProfessional {
+            0% {
+                transform: translateY(0) scale(1) rotate(-1deg);
+            }
+
+            20% {
+                transform: translateY(-10px) scale(1.01) rotate(1deg);
+            }
+
+            50% {
+                transform: translateY(-22px) scale(1.015) rotate(-1deg);
+            }
+
+            80% {
+                transform: translateY(-10px) scale(1.01) rotate(1deg);
+            }
+
+            100% {
+                transform: translateY(0) scale(1) rotate(-1deg);
+            }
+        }
+
+        /* Tres Contenedores */
+        .cajas-container {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .caja {
+            width: 270px;
+            /* Aumenta el ancho */
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+            font-family: sans-serif;
+            position: relative;
+        }
+
+        .caja:hover {
+            box-shadow: 0 8px 32px rgba(78, 84, 200, 0.18);
+        }
+
+        .caja-img {
+            width: 100%;
+            height: 200px;
+            /* Aumenta la altura de la imagen */
+            object-fit: cover;
+            display: block;
+        }
+
+        .caja-desc {
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            color: black;
+            text-align: center;
+            font-weight: bold;
+            padding: 0 16px;
+            font-size: 1rem;
+            transition: max-height 0.4s cubic-bezier(.4, 0, .2, 1), padding 0.4s;
+        }
+
+        .caja:hover .caja-desc {
+            max-height: 120px;
+            padding: 16px;
+        }
+
+        .caja-title {
+            text-align: center;
+            font-weight: bold;
+            margin: 12px 0 0 0;
+            font-size: 1.1rem;
+            color: #ef233c;
+            font-weight: bold;
+        }
+
+        .mas-info-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .mas-info-btn {
+            border: 1.5px solid #000;
+            background: #fff;
+            color: #000;
+            padding: 8px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            font-family: inherit;
+            font-weight: 500;
+            outline: none;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mas-info-btn:hover {
+            background: #ef233c;
+            color: #fff;
+            border-color: #ef233c;
+        }
+
+        /* Banner de Marcas */
+
+        .brands-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin: 60px 0 36px 0;
+            color: #222831;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: none;
+            border-bottom: none;
+            position: relative;
+        }
+
+        .brands-title::after {
+            content: "";
+            display: block;
+            margin: 16px auto 0 auto;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #ef233c 0%, #222831 100%);
+        }
+
+        .brands-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            gap: 22px;
+        }
+
+        .brands-row {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .brand-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90px;
+            box-shadow: 0 4px 18px rgba(34, 40, 49, 0.10), 0 1.5px 4px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s;
+            border: 1.5px solid #f0f0f0;
+            min-width: 140px;
+            flex: 1 1 0;
+            max-width: 170px;
+        }
+
+        .brand-item:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 8px 32px rgba(239, 35, 60, 0.13), 0 2px 8px rgba(0, 0, 0, 0.10);
+            border-color: #ef233c;
+        }
+
+        .brand-item img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+            filter: grayscale(0.15);
+            transition: filter 0.2s;
+        }
+
+        .brand-item:hover img {
+            filter: grayscale(0) brightness(1.1);
+        }
+
+        @media (max-width: 900px) {
+            .brands-row {
+                gap: 14px;
+                max-width: 100%;
+            }
+
+            .brand-item {
+                min-width: 90px;
+                max-width: 120px;
+                height: 70px;
+                padding: 10px 4px;
+            }
+
+            .brands-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .brands-row {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .brand-item {
+                min-width: 70px;
+                max-width: 90px;
+                height: 50px;
+                padding: 6px 2px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            bottom: 0;
+            width: auto;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            z-index: 1000;
+            transition: transform 0.2s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="main-header"
+        style="position:fixed; top:0; left:0; width:100%; z-index:100; transition: all 0.28s cubic-bezier(.4,0,.2,1);">
+        <div class="logo" id="logo-container" style="transition: all 0.28s cubic-bezier(.4,0,.2,1);">
+            <img src="Imagenes/Logo/Logo2.0.png" alt="Logo" id="logo-img"
+                style="max-height: 70px; transition: all 0.28s cubic-bezier(.4,0,.2,1);">
+        </div>
+        <nav id="main-nav" style="margin-right: 200px; transition: all 0.28s cubic-bezier(.4,0,.2,1);">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Autopartes </a></li>
+                <li>
+                    <a href="#">Páginas <span style="float: right;"
+                            class="material-symbols-outlined">stat_minus_1</span></a>
+                    <ul class="submenu">
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li> <a href="https://wa.me/1234567890">Contactenos</a>
+                        </li>
+                        <li> <a href="#">Redes Sociales</a>
+                            <ul class="submenu submenu-right">
+                                <li>
+                                    <a href="https://facebook.com/" target="_blank"
+                                        style="display: flex; align-items: center; gap: 10px;">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                                            alt="Facebook" style="width:24px; height:24px;"> Facebook
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://instagram.com/" target="_blank"
+                                        style="display: flex; align-items: center; gap: 10px;">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                                            alt="Instagram" style="width:24px; height:24px;"> Instagram
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tiktok.com/" target="_blank"
+                                        style="display: flex; align-items: center; gap: 10px;">
+                                        <img src="Imagenes/Icono TikTok.png" alt="TikTok"
+                                            style="width:24px; height:24px;"> TikTok
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://wa.me/1234567890" target="_blank"
+                                        style="display: flex; align-items: center; gap: 10px;">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                                            alt="WhatsApp" style="width:24px; height:24px;"> WhatsApp
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <script>
+        // Header shrink on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('main-header');
+            const logo = document.getElementById('logo-img');
+            const logoContainer = document.getElementById('logo-container');
+            if (window.scrollY > 60) {
+                header.style.padding = "4px 10px";
+                header.style.backgroundColor = "rgba(0,0,0,0.85)";
+                logo.style.maxHeight = "44px";
+                logoContainer.style.fontSize = "1.1em";
+            } else {
+                header.style.padding = "";
+                header.style.backgroundColor = "rgba(0,0,0,0.45)";
+                logo.style.maxHeight = "70px";
+                logoContainer.style.fontSize = "1.5em";
+            }
+        });
+    </script>
+
+    <div class="banner-principal" style="background-image: url('Imagenes/Fondo/Banner4.jpg'); position: relative;">
+        <!-- Sombra oscura sobre la imagen de fondo -->
+        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.20); z-index: 0; pointer-events: none;">
+        </div>
+        <h1 class="hero-text" id="hero-title" style="position: relative; z-index: 1;">
+            <span class="part1">Encuentra la </span>
+            <span class="part3">pieza</span>
+            <span class="part1">que tu vehiculo</span>
+            <span class="part3">necesita</span>
+        </h1>
+        <script>
+            // Efecto scroll: el título se desvanece y amplía al hacer scroll
+            window.addEventListener('scroll', function () {
+                const title = document.getElementById('hero-title');
+                const banner = title.parentElement;
+                const rect = banner.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                // Calcula cuánto del banner está visible
+                let visible = 1;
+                if (rect.top < 0) {
+                    visible = Math.max(0, 1 + rect.top / banner.offsetHeight);
+                }
+                // Aplica opacidad y escala
+                title.style.opacity = visible;
+                title.style.transform = `scale(${1 + (1 - visible) * 0.3})`;
+                title.style.transition = 'opacity 0.2s, transform 0.2s';
+            });
+        </script>
+    </div>
+    <br>
+
+    <div class="container">
+        <div class="box">
+            <span style="--i:1;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/KIA.png"
+                        alt="Kia"></a></span>
+            <span style="--i:2;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/Chevrolet.png"
+                        alt="Chevrolet"></a></span>
+            <span style="--i:3;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/Nissan.png"
+                        alt="Nissan"></a></span>
+            <span style="--i:4;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/RENAULT.png"
+                        alt="Renault"></a></span>
+            <span style="--i:5;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/Mazda.png"
+                        alt="Mazda"></a></span>
+            <span style="--i:6;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/HYUNDAI.png"
+                        alt="Hyundai"></a></span>
+            <span style="--i:7;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/TOYOTA.png"
+                        alt="Toyota"></a></span>
+            <span style="--i:8;"> <a href="https://wa.me/1234567890"><img src="Imagenes/Galeria/Nissan.png"
+                        alt="Nissan"></a></span>
+        </div>
+    </div><br><br>
+
+
+
+    <div class="banner-info-content-alt">
+        <div class="image-container-alt">
+            <img src="Imagenes/Efecto Parallax/Efecto Parllax.png" alt="Imagen Izquierda" class="floating-image-alt">
+        </div>
+        <div class="text-container-alt">
+            <h2>Repuestos Automotrices de Confianza</h2>
+            <p>
+                Importadores directos, <span class="highlight-red">calidad garantizada</span> y atención personalizada
+                para tu vehículo.
+            </p>
+            <div class="features-row">
+                <div class="feature-box envio">
+                    <span class="emoji">🚚</span>
+                    <span>
+                        <strong>Envíos a nivel nacional</strong><br>
+                        Entregamos tus repuestos en todo el país, de forma rápida y segura.
+                    </span>
+                </div>
+                <div class="feature-box original">
+                    <span class="emoji">🔧</span>
+                    <span>
+                        <strong>Productos 100% originales</strong><br>
+                        Garantía de calidad y respaldo en cada autoparte que ofrecemos.
+                    </span>
+                </div>
+                <div class="feature-box asesoria">
+                    <span class="emoji">📞</span>
+                    <span>
+                        <strong>Asesoría especializada</strong><br>
+                        Nuestro equipo te acompaña en la selección del repuesto ideal.
+                    </span>
+                </div>
+            </div>
+            <a href="https://wa.me/1234567890" target="_blank" class="cta-wsp">
+                <span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    ¡Solicita tu cotización!
+                </span>
+            </a>
+        </div>
+    </div>
+    <style>
+        .banner-info-content-alt {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            padding: 48px 5vw;
+            background:
+                linear-gradient(120deg, rgba(34, 40, 49, 0.65) 60%, rgba(239, 35, 60, 0.07) 100%),
+                url('Imagenes/Fondo/Parallaxfondo3.png') center center/cover no-repeat;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(34, 40, 49, 0.08);
+            margin-bottom: 48px;
+            gap: 32px;
+        }
+
+        .image-container-alt {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-image-alt {
+            max-width: 320px;
+            min-width: 180px;
+            width: 90%;
+            border-radius: 18px;
+            animation: floatYProfessional 3.2s cubic-bezier(.45, .05, .55, .95) infinite;
+        }
+
+        .text-container-alt {
+            flex: 2;
+            color: #fff;
+            padding-left: 48px;
+            padding-right: 12px;
+        }
+
+        .text-container-alt h2 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            margin-bottom: 22px;
+            letter-spacing: 1.5px;
+            color: #ef233c;
+            text-shadow: 0 4px 18px #22283133, 0 1.5px 4px #ef233c22;
+            text-align: left;
+            line-height: 1.18;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            border-left: 6px solid #ef233c;
+            padding-left: 18px;
+            background: linear-gradient(90deg, #ef233c11 0%, #22283105 100%);
+            border-radius: 6px;
+        }
+
+        .text-container-alt p {
+            font-size: 1.18rem;
+            margin-bottom: 18px;
+            color: #e0e0e0;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .text-container-alt .highlight-red {
+            color: #ef233c;
+            font-weight: 700;
+        }
+
+        .features-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .feature-box {
+            border-radius: 8px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05em;
+            background: rgba(34, 40, 49, 0.12);
+        }
+
+        .feature-box.envio {
+            background: rgba(34, 40, 49, 0.20);
+        }
+
+        .feature-box.original {
+            background: rgba(34, 40, 49, 0.18);
+        }
+
+        .feature-box.asesoria {
+            background: rgba(34, 40, 49, 0.12);
+        }
+
+        .feature-box .emoji {
+            font-size: 1.4em;
+        }
+
+        .feature-box.envio .emoji {
+            color: #25D366;
+        }
+
+        .feature-box.original .emoji {
+            color: #FFD600;
+        }
+
+        .feature-box.asesoria .emoji {
+            color: #1877f3;
+        }
+
+        .cta-wsp {
+            display: inline-block;
+            margin-top: 10px;
+            background: linear-gradient(90deg, #ef233c 0%, #222831 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.13em;
+            padding: 12px 38px;
+            border-radius: 10px;
+            box-shadow: 0 4px 18px rgba(239, 35, 60, 0.10);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: background 0.18s, transform 0.18s;
+        }
+
+        .cta-wsp span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-wsp img {
+            width: 26px;
+            height: 26px;
+            filter: brightness(1.2);
+        }
+
+        .cta-wsp:hover {
+            background: linear-gradient(90deg, #222831 0%, #ef233c 100%);
+            transform: scale(1.07);
+        }
+
+        @media (max-width: 900px) {
+            .banner-info-content-alt {
+                flex-direction: column;
+                padding: 32px 2vw;
+                gap: 18px;
+            }
+
+            .text-container-alt {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .image-container-alt {
+                margin-bottom: 18px;
+            }
+        }
+    </style>
+
+    <div class="cajas-container">
+        <div class="caja">
+            <img class="caja-img" src="Imagenes/Categorias/Frenado.png" alt="Sistema de frenado">
+            <div class="caja-title">FRENADO</div>
+            <div class="caja-desc">
+                <ul style="list-style: disc inside; margin:0; padding:0;">
+                    <li>Frenos y discos</li>
+                    <li>ABS</li>
+                    <li>Accesorios</li>
+                    <li>Servofreno</li>
+                    <li>Pinzas de freno</li>
+                    <li>Cilindro de freno</li>
+                </ul>
+            </div>
+            <div class="mas-info-btn-container">
+                <button class="mas-info-btn">MÁS INFORMACIÓN</button>
+            </div>
+        </div>
+        <div class="caja">
+            <img class="caja-img" src="https://prestashop.templatemela.com/PRSADD/PRS006/img/psblog/b/6/872_588/b-5.jpg"
+                alt="Suspensión">
+            <div class="caja-title">SUSPENSIÓN</div>
+            <div class="caja-desc">
+                <ul style="list-style: disc inside; margin:0; padding:0;">
+                    <li>Amortiguadores</li>
+                    <li>Brazos y terminales</li>
+                    <li>Muelles y resortes</li>
+                    <li>Bujes y soportes</li>
+                    <li>Estabilizadoras</li>
+                </ul>
+            </div>
+            <div class="mas-info-btn-container">
+                <button class="mas-info-btn">MÁS INFORMACIÓN</button>
+            </div>
+        </div>
+        <div class="caja">
+            <img class="caja-img"
+                src="https://cdn.shopify.com/s/files/1/0577/9675/5633/files/at_autozpro_about.png?v=1648141163"
+                alt="Motor">
+            <div class="caja-title">MOTOR</div>
+            <div class="caja-desc">
+                <ul style="list-style: disc inside; margin:0; padding:0;">
+                    <li>Filtros y correas</li>
+                    <li>Juntas y empaques</li>
+                    <li>Bombas de agua</li>
+                    <li>Pistones y anillos</li>
+                    <li>Repuestos originales</li>
+                </ul>
+            </div>
+            <div class="mas-info-btn-container">
+                <button class="mas-info-btn">MÁS INFORMACIÓN</button>
+            </div>
+        </div>
+        <div class="caja">
+            <img class="caja-img"
+                src="https://cdn.shopify.com/s/files/1/0577/9675/5633/files/at_autozpro_product-3.png?v=1648052707"
+                alt="Iluminación">
+            <div class="caja-title">ILUMINACIÓN</div>
+            <div class="caja-desc">
+                <ul style="list-style: disc inside; margin:0; padding:0;">
+                    <li>Faros delanteros y traseros</li>
+                    <li>Luces LED y halógenas</li>
+                    <li>Bombillos</li>
+                    <li>Exploradoras</li>
+                    <li>Accesorios de iluminación</li>
+                </ul>
+            </div>
+            <div class="mas-info-btn-container">
+                <button class="mas-info-btn">MÁS INFORMACIÓN</button>
+            </div>
+        </div>
+    </div>
+    <style>
+        .caja {
+            transition: transform 0.22s, box-shadow 0.22s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .caja:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 12px 36px rgba(239, 35, 60, 0.13), 0 2px 8px rgba(0, 0, 0, 0.10);
+            z-index: 2;
+        }
+
+        .caja-img {
+            transition: transform 0.22s, filter 0.22s;
+            filter: drop-shadow(0 4px 16px #ef233c11);
+        }
+
+        .caja:hover .caja-img {
+            transform: scale(1.08) rotate(-2deg);
+            filter: drop-shadow(0 8px 24px #ef233c33);
+        }
+
+        .mas-info-btn {
+            border: none;
+            background: linear-gradient(90deg, #ef233c 0%, #222831 100%);
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s, transform 0.18s;
+            box-shadow: 0 2px 8px rgba(239, 35, 60, 0.10);
+            letter-spacing: 1px;
+        }
+
+        .mas-info-btn:hover {
+            background: linear-gradient(90deg, #222831 0%, #ef233c 100%);
+            color: #fff;
+            transform: scale(1.07);
+        }
+    </style>
+
+    <section class="brands-section"
+        style="padding: 10px 0 40px 0; background: linear-gradient(120deg, #f8f9fa 60%, #e9ecef 100%);">
+        <h2 class="brands-title"
+            style="font-size:2.5rem; letter-spacing:2px; color:#222831; margin-bottom: 36px; text-shadow: 0 2px 8px #fff8;">
+            MARCAS CON LAS QUE TRABAJAMOS</h2>
+        <div class="brands-grid" style="gap: 32px;">
+            <div class="brands-row" style="gap: 38px;">
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0; box-shadow:0 4px 18px rgba(34,40,49,0.08);">
+                    <img src="Imagenes/Marcas/Bosch.png" alt="BOSCH" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/ACDelco.png" alt="ACDelco" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/Castrol.png" alt="Castrol" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/GM.png" alt="Chevrolet GM" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/ELF.png" alt="ELF" style="max-height:60px;">
+                </a>
+            </div>
+            <div class="brands-row" style="gap: 38px;">
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/Hyundai Mobis.png" alt="HyundaiMOBIS" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/LUK.png" alt="LUK" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/MOBIL.png" alt="MOBIL" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/NGK.png" alt="NGK" style="max-height:60px;">
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="brand-item"
+                    style="background:rgba(255,255,255,0.98); border:1.5px solid #e0e0e0;">
+                    <img src="Imagenes/Marcas/Valeo.png" alt="Valeo" style="max-height:60px;">
+                </a>
+            </div>
+        </div>
+        <style>
+            .brands-section {
+                border-radius: 24px;
+                box-shadow: 0 8px 32px rgba(34, 40, 49, 0.08);
+                margin: 0 3vw 60px 3vw;
+            }
+
+            .brands-title {
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 36px;
+                color: #222831;
+                text-align: center;
+            }
+
+            .brands-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+            }
+
+            .brands-row {
+                display: flex;
+                justify-content: center;
+                gap: 38px;
+                width: 100%;
+                max-width: 900px;
+            }
+
+            .brand-item {
+                background: #fff;
+                border-radius: 16px;
+                padding: 18px 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 90px;
+                min-width: 140px;
+                max-width: 170px;
+                box-shadow: 0 4px 18px rgba(34, 40, 49, 0.10), 0 1.5px 4px rgba(0, 0, 0, 0.08);
+                border: 1.5px solid #e0e0e0;
+                transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+                cursor: pointer;
+                opacity: 0.92;
+                filter: grayscale(0.18) brightness(1.05);
+                text-decoration: none;
+            }
+
+            .brand-item:hover {
+                transform: translateY(-8px) scale(1.08);
+                box-shadow: 0 12px 36px rgba(239, 35, 60, 0.13), 0 2px 8px rgba(0, 0, 0, 0.10);
+                border-color: #ef233c;
+                opacity: 1;
+                filter: grayscale(0) brightness(1.13);
+            }
+
+            .brand-item img {
+                max-width: 100%;
+                max-height: 60px;
+                object-fit: contain;
+                transition: filter 0.18s, transform 0.18s;
+                filter: drop-shadow(0 2px 8px #ef233c11);
+            }
+
+            .brand-item:hover img {
+                filter: drop-shadow(0 4px 16px #ef233c33);
+                transform: scale(1.07);
+            }
+
+            @media (max-width: 900px) {
+                .brands-row {
+                    gap: 18px;
+                    max-width: 100%;
+                }
+
+                .brand-item {
+                    min-width: 90px;
+                    max-width: 120px;
+                    height: 70px;
+                    padding: 10px 8px;
+                }
+
+                .brands-title {
+                    font-size: 1.5rem;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .brands-row {
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+
+                .brand-item {
+                    min-width: 70px;
+                    max-width: 90px;
+                    height: 50px;
+                    padding: 6px 2px;
+                }
+
+                .brands-section {
+                    margin: 0 1vw 30px 1vw;
+                    padding: 30px 0 18px 0;
+                }
+            }
+        </style>
+    </section>
+    </div><br> <br>
+
+    <!-- Botones flotantes de redes sociales en la esquina inferior derecha -->
+    <div class="social-float-group">
+        <a href="https://instagram.com/" target="_blank" class="social-float-btn" id="btn-instagram"
+            aria-label="Síguenos en Instagram" style="background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+              box-shadow: 0 8px 24px rgba(214,36,159,0.13), 0 2px 8px rgba(0,0,0,0.10); border: 2.5px solid #fff;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
+                style="filter: drop-shadow(0 2px 6px #d6249f88); width:32px; height:32px;">
+            <span class="social-float-label"
+                style="font-weight:700; letter-spacing:0.5px; font-size:1.08em; background: #222831; border: 1.5px solid #d6249f; box-shadow: 0 2px 8px rgba(214,36,159,0.10); padding: 8px 18px;">
+                <span style="display:flex; align-items:center; gap:8px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt=""
+                        style="width:22px; height:22px;">
+                    <span>
+                        <span style="color:#d6249f;">Síguenos en</span><br>
+                        <span style="font-weight:400; color:#fff;">Instagram</span>
+                    </span>
+                </span>
+            </span>
+        </a>
+        <a href="https://facebook.com/" target="_blank" class="social-float-btn" id="btn-facebook"
+            aria-label="Síguenos en Facebook" style="background: linear-gradient(135deg, #1877f3 80%, #4267B2 100%);
+              box-shadow: 0 8px 24px rgba(24,119,243,0.13), 0 2px 8px rgba(0,0,0,0.10); border: 2.5px solid #fff;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"
+                style="filter: drop-shadow(0 2px 6px #1877f388); width:32px; height:32px;">
+            <span class="social-float-label"
+                style="font-weight:700; letter-spacing:0.5px; font-size:1.08em; background: #222831; border: 1.5px solid #1877f3; box-shadow: 0 2px 8px rgba(24,119,243,0.10); padding: 8px 18px;">
+                <span style="display:flex; align-items:center; gap:8px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt=""
+                        style="width:22px; height:22px;">
+                    <span>
+                        <span style="color:#1877f3;">Síguenos en</span><br>
+                        <span style="font-weight:400; color:#fff;">Facebook</span>
+                    </span>
+                </span>
+            </span>
+        </a>
+        <a href="https://wa.me/1234567890" target="_blank" id="whatsapp-button" class="social-float-btn"
+            aria-label="Contáctanos por WhatsApp" style="background: linear-gradient(135deg, #25D366 70%, #128C7E 100%);
+              box-shadow: 0 8px 24px rgba(37,211,102,0.22), 0 2px 8px rgba(0,0,0,0.10);
+              border: 2.5px solid #fff; animation: pulse-whatsapp 1.7s infinite;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                style="filter: drop-shadow(0 2px 6px #128C7E88); width:32px; height:32px;">
+            <span class="social-float-label"
+                style="font-weight:700; letter-spacing:0.5px; font-size:1.08em; background: #222831; border: 1.5px solid #25D366; box-shadow: 0 2px 8px rgba(37,211,102,0.10); padding: 8px 18px;">
+                <span style="display:flex; align-items:center; gap:8px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""
+                        style="width:22px; height:22px; filter: grayscale(0) brightness(1.2);">
+                    <span>
+                        <span style="color:#25D366;">¿Necesitas ayuda?</span><br>
+                        <span style="font-weight:400; color:#fff;">Chatea con nuestro equipo en <b>WhatsApp</b></span>
+                    </span>
+                </span>
+            </span>
+        </a>
+        <style>
+            @keyframes pulse-whatsapp {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.22), 0 2px 8px rgba(0, 0, 0, 0.10);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0.10), 0 2px 8px rgba(0, 0, 0, 0.10);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.22), 0 2px 8px rgba(0, 0, 0, 0.10);
+                }
+            }
+
+            #whatsapp-button {
+                transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+            }
+
+            #whatsapp-button:hover,
+            #whatsapp-button:focus {
+                background: linear-gradient(135deg, #128C7E 80%, #25D366 100%);
+                transform: scale(1.20) rotate(-2deg);
+                box-shadow: 0 14px 38px rgba(37, 211, 102, 0.28), 0 4px 16px rgba(0, 0, 0, 0.13);
+            }
+
+            #whatsapp-button .social-float-label {
+                background: #222831;
+                color: #fff;
+                border: 1.5px solid #25D366;
+                font-family: 'Montserrat', Arial, sans-serif;
+                font-size: 1.08em;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(37, 211, 102, 0.10);
+            }
+
+            #whatsapp-button:hover .social-float-label,
+            #whatsapp-button:focus .social-float-label {
+                background: #25D366;
+                color: #222831;
+                border: 1.5px solid #128C7E;
+            }
+        </style>
+        </a>
+    </div>
+
+    <footer class="footer-main"
+        style="background-image: url('Imagenes/Imagens/Footer.png'); background-size: cover; background-position: center;">
+        <div class="footer-overlay"
+            style="position:absolute; inset:0; background:rgba(24,24,24,0.92); z-index:0; pointer-events:none;"></div>
+        <div class="footer-top" style="position:relative; z-index:1;">
+            <div class="footer-col footer-brand">
+                <img src="Imagenes/Logo/Logo2.0.png" alt="Autoway Logo" class="footer-logo">
+                <p class="footer-desc"
+                    style="font-size: 1.3em; font-weight: 700; color: #ef233c; margin: 18px 0 0 0; letter-spacing: 1.2px; text-shadow: 0 2px 12px #22283133, 0 1.5px 4px #ef233c22;">
+                    Encuentra la <span style="color:#fff;">pieza</span> que tu vehículo <span
+                        style="color:#fff;">necesita</span>
+                </p>
+            </div>
+            <div class="footer-vertical-divider"></div>
+            <div class="footer-col"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img src="Imagenes/Logo/Logo2.0.png" alt="Logo JED-CARS"
+                    style="max-width: 140px; margin: 0 auto; display: block;">
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">CONTACTANOS</h3>
+                <ul class="footer-contact"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 0;">
+                    <li style="width: 100%; display: flex; justify-content: center;">
+                        <span class="footer-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                                style="width: 22px; height: 22px;">
+                        </span>
+                        <a href="https://wa.me/573246387099" target="_blank"
+                            style="color:white; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                            <span style="font-size:1.15em;">+57 324 638 7099</span>
+                        </a>
+                    </li>
+                    <li style="width: 95%; display: flex; justify-content: center;">
+                        <span class="footer-icon">
+                            <img src="Imagenes/Iconos/Redes/Icono Correo.png" alt="Email"
+                                style="width: 20px; height: 20px;">
+                        </span>
+                        <span
+                            style="color:white; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-size:1.05em;">
+                            ventas@jedcars.com
+                        </span>
+                    </li>
+                    <li style="width: 100%; display: flex; justify-content: center;">
+                        <span class="footer-icon">
+                            <img src="Imagenes/Iconos/Redes/Icono map.png" alt="Dirección"
+                                style="width: 20px; height: 20px;">
+                        </span>
+                        <span
+                            style="color:white; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-size:1.05em;">
+                            Calle 123 #45-67, Bogotá
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="width:100%; display:flex; justify-content:center; align-items:center;">
+                <div
+                    style="width:100%; max-width:700px; text-align:center; background:linear-gradient(90deg,#222831 0%,#ef233c 100%); color:#fff; font-size:0.95em; font-weight:500; border-radius:8px; padding:8px 0; margin-top:18px; box-shadow:0 2px 8px #ef233c22; margin-left:auto; margin-right:auto;">
+                    <span style="letter-spacing:0.5px;">&copy; 2024 <span
+                            style="color:#ef233c; font-weight:700;">JED-CARS</span> | Hecho en Colombia</span>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .footer-main {
+                background: #181818;
+                color: #fff;
+                font-family: 'Montserrat', Arial, sans-serif;
+                margin: 0;
+                padding-top: 0;
+                width: 100%;
+                position: relative;
+                left: 50%;
+                right: 50%;
+                transform: translateX(-50%);
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            .footer-overlay {
+                pointer-events: none;
+            }
+
+            .footer-top {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 40px 24px;
+                padding: 48px 6vw 32px 6vw;
+                align-items: flex-start;
+            }
+
+            .footer-col {
+                flex: 1 1 180px;
+                min-width: 180px;
+                max-width: 270px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .footer-logo {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                margin-bottom: 8px;
+            }
+
+            .footer-desc {
+                color: #e0e0e0;
+                font-size: 0.98em;
+                margin-bottom: 0;
+            }
+
+            .footer-heading {
+                color: #ef233c;
+                font-size: 1.1em;
+                font-weight: 700;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+            .footer-links,
+            .footer-contact {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .footer-links li,
+            .footer-contact li {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1em;
+                transition: color 0.18s;
+            }
+
+            .footer-links a:hover {
+                color: #ef233c;
+            }
+
+            .footer-contact {
+                color: #fff;
+                font-size: 0.98em;
+            }
+
+            .footer-contact li {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .footer-icon {
+                color: #ef233c;
+                font-size: 1.3em;
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
+
+            .footer-divider {
+                border-top: 1.5px solid #333;
+                margin: 0 6vw 0 6vw;
+            }
+
+            .footer-bottom {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: flex-end;
+                padding: 18px 6vw 12px 6vw;
+                gap: 18px 12px;
+            }
+
+            .footer-bottom-left {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .footer-bottom-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 18px 12px;
+                list-style: none;
+                padding: 0;
+                margin: 0 0 4px 0;
+            }
+
+            .footer-bottom-links a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 0.97em;
+                transition: color 0.18s;
+            }
+
+            .footer-bottom-links a:hover {
+                color: #ef233c;
+            }
+
+            .footer-copyright {
+                font-size: 0.93em;
+                color: #bdbdbd;
+                margin-top: 2px;
+                text-align: left;
+            }
+
+            .footer-bottom-right {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            }
+
+            .footer-payment-icon {
+                height: 28px;
+                width: auto;
+                filter: brightness(0) invert(1) grayscale(1) contrast(1.2);
+                background: #222;
+                border-radius: 4px;
+                padding: 4px 8px;
+            }
+
+            .footer-vertical-divider {
+                width: 2px;
+                min-width: 2px;
+                background: #333;
+                height: 200px;
+                align-self: center;
+                margin: 0 32px;
+                border-radius: 2px;
+            }
+
+            /* Botones flotantes de redes sociales */
+            .social-float-group {
+                position: fixed;
+                bottom: 32px;
+                right: 20px;
+                z-index: 1100;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .social-float-btn {
+                background: #fff;
+                border-radius: 12px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+                transition: transform 0.18s;
+                position: relative;
+                overflow: visible;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            #btn-instagram {
+                background: #e4405f;
+            }
+
+            #btn-facebook {
+                background: #1877f3;
+            }
+
+            #whatsapp-button {
+                background: #25D366;
+            }
+
+            .social-float-btn img {
+                width: 32px;
+                height: 32px;
+                pointer-events: none;
+            }
+
+            .social-float-btn:hover {
+                transform: scale(1.13);
+                box-shadow: 0 8px 24px rgba(34, 40, 49, 0.18);
+            }
+
+            .social-float-label {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                right: 110%;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #222831;
+                color: #fff;
+                padding: 6px 16px;
+                border-radius: 8px;
+                white-space: nowrap;
+                font-size: 1em;
+                font-family: inherit;
+                font-weight: 500;
+                pointer-events: none;
+                transition: opacity 0.18s, visibility 0.18s, right 0.18s;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+                z-index: 1200;
+            }
+
+            .social-float-btn:hover .social-float-label,
+            .social-float-btn:focus .social-float-label {
+                opacity: 1;
+                visibility: visible;
+                right: 120%;
+            }
+
+            @media (max-width: 480px) {
+                .footer-main {
+                    font-size: 0.97em;
+                }
+
+                .footer-logo {
+                    width: 48px;
+                    height: 48px;
+                }
+
+                .footer-bottom-links {
+                    gap: 10px 6px;
+                }
+
+                .footer-payment-icon {
+                    height: 20px;
+                    padding: 2px 4px;
+                }
+
+                /* Botones flotantes más pequeños en móvil */
+                .social-float-btn {
+                    width: 44px !important;
+                    height: 44px !important;
+                }
+
+                .social-float-btn img {
+                    width: 24px !important;
+                    height: 24px !important;
+                }
+
+                .social-float-label {
+                    font-size: 0.95em;
+                    padding: 5px 10px;
+                }
+
+                .social-float-group {
+                    bottom: 18px;
+                    right: 10px;
+                    gap: 10px;
+                }
+            }
+        </style>
+    </footer>
+
+</html>
